@@ -21,35 +21,34 @@ export default function Contact() {
   const [loading, setLoading] = React.useState(false);
 
   async function sendEmail() {
-    setLoading(true);
-    var templateParams = {
-      name: name,
-      message: message,
-      email: email,
-      phone: phone,
-    };
-
-    emailjs
-      .send(
-        "service_o2c9fvm",
-        "template_6u1wc2a",
-        templateParams,
-        "ZQHepmE1aJJZHPfi3"
-      )
-      .then(
-        function (response) {
-          console.log("SUCCESS!", response.status, response.text);
-          setLoading(false);
-          setSuccess(true);
-          setEmail("");
-          setPhone("");
-          setMessage("");
-          setName("");
-        },
-        function (err) {
-          console.log("FAILED...", err);
-        }
-      );
+    // setLoading(true);
+    // var templateParams = {
+    //   name: name,
+    //   message: message,
+    //   email: email,
+    //   phone: phone,
+    // };
+    // emailjs
+    //   .send(
+    //     "service_o2c9fvm",
+    //     "template_6u1wc2a",
+    //     templateParams,
+    //     "ZQHepmE1aJJZHPfi3"
+    //   )
+    //   .then(
+    //     function (response) {
+    //       console.log("SUCCESS!", response.status, response.text);
+    //       setLoading(false);
+    //       setSuccess(true);
+    //       setEmail("");
+    //       setPhone("");
+    //       setMessage("");
+    //       setName("");
+    //     },
+    //     function (err) {
+    //       console.log("FAILED...", err);
+    //     }
+    //   );
   }
 
   return (
@@ -89,7 +88,7 @@ export default function Contact() {
         onPress={sendEmail}
         style={{
           display: success ? "none" : "flex",
-          width: "95%",
+          width: "100%",
           backgroundColor: colors.primaryLight,
           paddingVertical: 10,
           marginVertical: 30,
@@ -117,7 +116,7 @@ export default function Contact() {
       <TouchableOpacity
         style={{
           display: success ? "flex" : "none",
-          width: "95%",
+          width: "100%",
           backgroundColor: success ? "green" : colors.primaryLight,
           paddingVertical: 10,
           marginVertical: 30,
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "white",
     borderRadius: 5,
-    width: "95%",
+    width: "100%",
     padding: 5,
     paddingStart: 10,
   },
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: {
-    width: "95%",
+    width: "100%",
     backgroundColor: colors.primaryLight,
     paddingVertical: 10,
     marginVertical: 30,

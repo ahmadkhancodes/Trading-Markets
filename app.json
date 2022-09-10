@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#07051c"
-      }
+      },
+      "package": "com.tradingmarkets.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
