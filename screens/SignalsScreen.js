@@ -15,7 +15,9 @@ import AppText from "../components/AppText";
 export default function SignalsScreen() {
   var DATA = useSelector((state) => state.data.allData);
   const [index, setIndex] = React.useState();
+  const [openStatus, setOpenStatus] = React.useState(false);
   const setOpen = (index) => {
+    setOpenStatus(!openStatus);
     setIndex(index);
   };
   var count = 1;
@@ -43,9 +45,9 @@ export default function SignalsScreen() {
   };
   return (
     <View style={styles.container}>
-      {DATA ? (
+      {DATA !== [] ? (
         <FlatList
-          data={DATA}
+          data={DATA.filter((item) => item.ispublished === true)}
           renderItem={({ item }) => (
             <View
               style={{
@@ -82,7 +84,7 @@ export default function SignalsScreen() {
                 style={{
                   borderWidth: 1,
                   borderColor: colors.primaryLight,
-                  display: index === item.id ? "flex" : "none",
+                  display: index === item.id && openStatus ? "flex" : "none",
                 }}
               >
                 <View
@@ -164,11 +166,11 @@ export default function SignalsScreen() {
                     paddingHorizontal: 3,
                     borderBottomColor: colors.primaryLight,
                     borderWidth: 1,
-                    display: item.profit === "" ? "none" : "flex",
+                    display: item.close_price === "" ? "none" : "flex",
                   }}
                 >
-                  <AppText>Profit</AppText>
-                  <AppText>{item.profit}</AppText>
+                  <AppText>Close Price</AppText>
+                  <AppText>{item.close_price}</AppText>
                 </View>
                 <View
                   style={{
@@ -178,11 +180,11 @@ export default function SignalsScreen() {
                     paddingHorizontal: 3,
                     borderBottomColor: colors.primaryLight,
                     borderWidth: 1,
-                    display: item.close_price === "" ? "none" : "flex",
+                    display: item.profit === "" ? "none" : "flex",
                   }}
                 >
-                  <AppText>Close Price</AppText>
-                  <AppText>{item.close_price}</AppText>
+                  <AppText>Profit</AppText>
+                  <AppText>{item.profit}</AppText>
                 </View>
                 <View
                   style={{
@@ -223,6 +225,7 @@ export default function SignalsScreen() {
       ) : (
         <ActivityIndicator color={"white"} />
       )}
+      <Text style={{ display: "none" }}>{(count = 1)}</Text>
     </View>
   );
 }

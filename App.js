@@ -13,6 +13,10 @@ import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
 import { dataActions } from "./store/data-slice";
 import { Provider, useDispatch } from "react-redux";
+import * as Notifications from "expo-notifications";
+import { isDevice } from "expo-device";
+import { LogBox } from "react-native";
+LogBox.ignoreAllLogs(true);
 
 const Stack = createStackNavigator();
 
@@ -31,7 +35,38 @@ function App() {
       }
       console.log("DATA fetched from APP.JS");
     });
+    getToken();
+    dispatch(dataActions.getStatus());
   });
+  async function getToken() {
+    try {
+      if (isDevice) {
+        const { status: existingStatus } =
+          await Notifications.requestPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== "granted") {
+          const { status } = await Notifications.requestPermissionsAsync();
+          finalStatus = status;
+        }
+        if (finalStatus !== "granted") {
+          console.log("Failed to get push token for push notification!");
+          return;
+        }
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+        dispatch(dataActions.setToken(token));
+      } else {
+        console.log("Must use physical device for Push Notifications");
+      }
+      if (Platform.OS === "android") {
+        Notifications.setNotificationChannelAsync("default", {
+          name: "default",
+          importance: Notifications.AndroidImportance.MAX,
+        });
+      }
+    } catch (error) {
+      console.log("Error getting a push token", error);
+    }
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

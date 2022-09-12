@@ -3,15 +3,21 @@ import React, { useState } from "react";
 import colors from "../assets/colors";
 import Constants from "expo-constants";
 import AppText from "../components/AppText";
+import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
 
 export default function NotificationScreen() {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const dispatch = useDispatch();
+  const isEnabled = useSelector((state) => state.data.allowNotifications);
+  const toggleSwitch = () => {
+    dispatch(dataActions.enableOrDisableNotification(!isEnabled));
+    dispatch(dataActions.saveTokenToFirebase());
+  };
+
   React.useEffect(() => {
-    if (isEnabled) {
-      console.log(isEnabled);
-    }
-  }, [isEnabled]);
+    dispatch(dataActions.getStatus());
+  }, []);
+
   return (
     <View style={styles.container}>
       <View
