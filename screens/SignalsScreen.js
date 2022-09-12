@@ -46,182 +46,199 @@ export default function SignalsScreen() {
   return (
     <View style={styles.container}>
       {DATA !== [] ? (
-        <FlatList
-          data={DATA.filter((item) => item.ispublished === true)}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                marginVertical: 3,
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  backgroundColor: item.action === "buy" ? "green" : "red",
-                  paddingVertical: 10,
-                }}
-                onPress={() => setOpen(item.id)}
-              >
-                <AppText style={{ fontWeight: "bold", right: 40 }}>
-                  {count++}) {item.action.toString().toUpperCase()}
-                </AppText>
-                <AppText>{item.instrument.toString().toUpperCase()}</AppText>
-                <AppText
-                  style={{
-                    backgroundColor:
-                      item.isactive === "active" ? "#0f45ba" : "",
-                    padding: item.isactive === "active" ? 5 : 0,
-                    left: 40,
-                  }}
-                >
-                  {item.isactive.toString().toUpperCase()}
-                </AppText>
-              </TouchableOpacity>
+        <>
+          <Text style={{ display: "none" }}>{(count = 1)}</Text>
+          <FlatList
+            data={DATA.filter((item) => item.ispublished === true)}
+            renderItem={({ item }) => (
               <View
                 style={{
-                  borderWidth: 1,
-                  borderColor: colors.primaryLight,
-                  display: index === item.id && openStatus ? "flex" : "none",
+                  marginVertical: 3,
                 }}
               >
+                <TouchableOpacity
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    backgroundColor: item.action === "buy" ? "green" : "red",
+                    paddingVertical: 10,
+                  }}
+                  onPress={() => setOpen(item.id)}
+                >
+                  <AppText style={{ fontWeight: "bold", right: 40 }}>
+                    {count++}) {item.action.toString().toUpperCase()}
+                  </AppText>
+                  <AppText>{item.instrument.toString().toUpperCase()}</AppText>
+                  <AppText
+                    style={{
+                      backgroundColor:
+                        item.isactive === "active" ? "#0f45ba" : "",
+                      padding: item.isactive === "active" ? 5 : 0,
+                      left: 40,
+                    }}
+                  >
+                    {item.isactive.toString().toUpperCase()}
+                  </AppText>
+                </TouchableOpacity>
                 <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
                     borderWidth: 1,
-                    display: item.open_price === "" ? "none" : "flex",
+                    borderColor: colors.primaryLight,
+                    display: index === item.id && openStatus ? "flex" : "none",
+                    backgroundColor: "white",
                   }}
                 >
-                  <AppText>Open Price</AppText>
-                  <AppText>{item.open_price}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.stop_loss === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Stop Loss</AppText>
-                  <AppText>{item.stop_loss}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.take_profit === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Take Profit</AppText>
-                  <AppText>{item.take_profit}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display:
-                      item.risk_factor_in_points === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Risk factor in points</AppText>
-                  <AppText>{item.risk_factor_in_points}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.recommended_leverage === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Recommend Leverage</AppText>
-                  <AppText>{item.recommended_leverage}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.close_price === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Close Price</AppText>
-                  <AppText>{item.close_price}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.profit === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Profit</AppText>
-                  <AppText>{item.profit}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display: item.open_date_and_time === "" ? "none" : "flex",
-                  }}
-                >
-                  <AppText>Open Time</AppText>
-                  <AppText>{formatDate(item.open_date_and_time)}</AppText>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 7,
-                    paddingHorizontal: 3,
-                    borderBottomColor: colors.primaryLight,
-                    borderWidth: 1,
-                    display:
-                      item.close_date_and_time === "undefined"
-                        ? "none"
-                        : "flex",
-                  }}
-                >
-                  <AppText>Close Time</AppText>
-                  <AppText>{formatDate(item.close_date_and_time)}</AppText>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.open_price === "" ? "none" : "flex",
+                    }}
+                  >
+                    <AppText style={{ color: "black" }}>Open Price</AppText>
+                    <AppText style={{ color: "black" }}>
+                      {item.open_price}
+                    </AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.stop_loss === "" ? "none" : "flex",
+                    }}
+                  >
+                    <AppText style={{ color: "black" }}>Stop Loss</AppText>
+                    <AppText style={{ color: "black" }}>
+                      {item.stop_loss}
+                    </AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.take_profit === "" ? "none" : "flex",
+                    }}
+                  >
+                    <AppText style={{ color: "black" }}>Take Profit</AppText>
+                    <AppText style={{ color: "black" }}>
+                      {item.take_profit}
+                    </AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.white,
+                      borderWidth: 1,
+                      display:
+                        item.risk_factor_in_points === "" ? "none" : "flex",
+                      backgroundColor: "black",
+                    }}
+                  >
+                    <AppText>Risk factor in points</AppText>
+                    <AppText>{item.risk_factor_in_points}</AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display:
+                        item.recommended_leverage === "" ? "none" : "flex",
+                      backgroundColor: "black",
+                    }}
+                  >
+                    <AppText>Recommend Leverage</AppText>
+                    <AppText>{item.recommended_leverage}</AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.close_price === "" ? "none" : "flex",
+                    }}
+                  >
+                    <AppText style={{ color: "black" }}>Close Price</AppText>
+                    <AppText style={{ color: "black" }}>
+                      {item.close_price}
+                    </AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.profit === "" ? "none" : "flex",
+                    }}
+                  >
+                    <AppText style={{ color: "black" }}>Profit</AppText>
+                    <AppText style={{ color: "black" }}>{item.profit}</AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display: item.open_date_and_time === "" ? "none" : "flex",
+                      backgroundColor: "grey",
+                    }}
+                  >
+                    <AppText>Open Time</AppText>
+                    <AppText>{formatDate(item.open_date_and_time)}</AppText>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 7,
+                      paddingHorizontal: 3,
+                      borderBottomColor: colors.primaryLight,
+                      borderWidth: 1,
+                      display:
+                        item.close_date_and_time === "undefined"
+                          ? "none"
+                          : "flex",
+                      backgroundColor: "grey",
+                    }}
+                  >
+                    <AppText>Close Time</AppText>
+                    <AppText>{formatDate(item.close_date_and_time)}</AppText>
+                  </View>
                 </View>
               </View>
-            </View>
-          )}
-          keyExtractor={(item) => item.id}
-        />
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </>
       ) : (
         <ActivityIndicator color={"white"} />
       )}

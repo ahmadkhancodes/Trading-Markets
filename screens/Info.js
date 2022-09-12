@@ -13,13 +13,11 @@ export default function Info() {
         Disclaimer
       </AppText>
       <AppText style={{ fontSize: 15 }}>
-        These signals are only for education purpose. We recommend you to use
-        our signals on demo account. Data contained in this application is not
-        necessarily real-time nor accurate and so prices may not be accurate and
-        may differ from the actual market price, meaning prices are indicative
-        and not appropriate for trading purposes. Therefore we doesnst bear any
-        responsibility for any trading losses you might incur as a result of
-        using this data.
+        Trading Markets signals are for educational purposes only! We recommend
+        you to use our signals only on a demo account. If you choose to use
+        Trading Markets signals for live trading it is at your own risk. We will
+        bear no responsibility for any losses incurred by your actions. Trading
+        is highly complex and you may lose more than your initial deposit.
       </AppText>
     </View>
   );

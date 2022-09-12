@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import colors from "./assets/colors";
 import store from "./store/index";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -16,6 +16,8 @@ import { Provider, useDispatch } from "react-redux";
 import * as Notifications from "expo-notifications";
 import { isDevice } from "expo-device";
 import { LogBox } from "react-native";
+import AppText from "./components/AppText";
+import Donation from "./screens/Donation";
 LogBox.ignoreAllLogs(true);
 
 const Stack = createStackNavigator();
@@ -98,13 +100,30 @@ function App() {
           component={Info}
         />
         <Stack.Screen
-          options={{
+          options={({ navigation }) => ({
             title: "Signals",
             headerStyle: {
               backgroundColor: colors.primary,
             },
             headerTintColor: colors.white,
-          }}
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("donate")}
+                style={{
+                  backgroundColor: "#f58a42",
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  right: 15,
+                }}
+              >
+                <AppText
+                  style={{ color: "black", fontWeight: "bold", fontSize: 17 }}
+                >
+                  Donate
+                </AppText>
+              </TouchableOpacity>
+            ),
+          })}
           name="signals"
           component={SignalsScreen}
         />
@@ -118,6 +137,17 @@ function App() {
           }}
           name="contact"
           component={Contact}
+        />
+        <Stack.Screen
+          options={{
+            title: "Donate",
+            headerStyle: {
+              backgroundColor: colors.primary,
+            },
+            headerTintColor: colors.white,
+          }}
+          name="donate"
+          component={Donation}
         />
       </Stack.Navigator>
     </NavigationContainer>

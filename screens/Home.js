@@ -118,6 +118,18 @@ export default function Home({ navigation }) {
           </AppText>
         </Pressable>
       </View>
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        <Pressable
+          onPress={() => navigation.navigate("donate")}
+          style={styles.lastContainer}
+        >
+          <AppText style={{ fontWeight: "bold", fontSize: 17 }}>Donate</AppText>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -142,6 +154,21 @@ const styles = StyleSheet.create({
     height:
       Dimensions.get("screen").height -
       (Dimensions.get("screen").height * 80) / 100,
+    left: 5,
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 7,
+    marginVertical: 5,
+  },
+  lastContainer: {
+    backgroundColor: colors.primaryLight,
+    width:
+      Dimensions.get("screen").width -
+      (Dimensions.get("screen").width * 40) / 100,
+    height:
+      Dimensions.get("screen").height -
+      (Dimensions.get("screen").height * 95) / 100,
     left: 5,
     borderRadius: 15,
     justifyContent: "center",
