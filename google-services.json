@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069278574035",
+    "firebase_url": "https://trading-markets-notifications-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "trading-markets-notifications",
+    "storage_bucket": "trading-markets-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069278574035:android:e86d7a7d3467c26341ab26",
+        "android_client_info": {
+          "package_name": "com.tradingmarkets.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069278574035-3komb3tdcs8ajg4cu8lul7feekn4vndc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5PMEcnV5N1I3aO0Ihbh7TtPbPdPbxuTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069278574035-3komb3tdcs8ajg4cu8lul7feekn4vndc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

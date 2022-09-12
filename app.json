@@ -25,7 +25,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#07051c"
       },
-      "package": "com.tradingmarkets.app"
+      "package": "com.tradingmarkets.app",
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
