@@ -11,6 +11,7 @@ import NotificationScreen from "./screens/NotificationScreen";
 import SignalsScreen from "./screens/SignalsScreen";
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
+import { db as db2 } from "./FirebaseForNoti";
 import { dataActions } from "./store/data-slice";
 import { Provider, useDispatch } from "react-redux";
 import * as Notifications from "expo-notifications";
@@ -38,7 +39,6 @@ function App() {
       console.log("DATA fetched from APP.JS");
     });
     getToken();
-    dispatch(dataActions.getStatus());
   });
   async function getToken() {
     try {
@@ -69,6 +69,18 @@ function App() {
       console.log("Error getting a push token", error);
     }
   }
+  React.useEffect(() => {
+    onValue(ref(db2), (snapshot) => {
+      const data = snapshot.val() || {};
+      if (data["USER_TOKENS"] === undefined) {
+        dispatch(dataActions.setAllTokens([]));
+        console.log(data["USER_TOKENS"]);
+      } else {
+        console.log(data["USER_TOKENS"]);
+        dispatch(dataActions.setAllTokens(data["USER_TOKENS"]));
+      }
+    });
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
