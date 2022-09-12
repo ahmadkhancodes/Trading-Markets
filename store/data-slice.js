@@ -6,7 +6,7 @@ import { db } from "../FirebaseForNoti";
 
 const initialDataState = {
   allData: [],
-  allowNotifications: false,
+  allowNotifications: undefined,
   deviceToken: "",
 };
 

@@ -43,11 +43,14 @@ export default function SignalsScreen() {
     }
     return d;
   };
+
+  React.useEffect(() => {
+    count = 1;
+  }, [DATA]);
   return (
     <View style={styles.container}>
       {DATA !== [] ? (
         <>
-          <Text style={{ display: "none" }}>{(count = 1)}</Text>
           <FlatList
             data={DATA.filter((item) => item.ispublished === true)}
             renderItem={({ item }) => (
