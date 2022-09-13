@@ -78,7 +78,7 @@ export default function SignalsScreen() {
                     style={{
                       backgroundColor:
                         item.isactive === "active" ? "#0f45ba" : "",
-                      padding: item.isactive === "active" ? 5 : 0,
+                      paddingHorizontal: item.isactive === "active" ? 5 : 0,
                       left: 40,
                     }}
                   >

@@ -21,34 +21,34 @@ export default function Contact() {
   const [loading, setLoading] = React.useState(false);
 
   async function sendEmail() {
-    // setLoading(true);
-    // var templateParams = {
-    //   name: name,
-    //   message: message,
-    //   email: email,
-    //   phone: phone,
-    // };
-    // emailjs
-    //   .send(
-    //     "service_o2c9fvm",
-    //     "template_6u1wc2a",
-    //     templateParams,
-    //     "ZQHepmE1aJJZHPfi3"
-    //   )
-    //   .then(
-    //     function (response) {
-    //       console.log("SUCCESS!", response.status, response.text);
-    //       setLoading(false);
-    //       setSuccess(true);
-    //       setEmail("");
-    //       setPhone("");
-    //       setMessage("");
-    //       setName("");
-    //     },
-    //     function (err) {
-    //       console.log("FAILED...", err);
-    //     }
-    //   );
+    setLoading(true);
+    var templateParams = {
+      name: name,
+      message: message,
+      email: email,
+      phone: phone,
+    };
+    emailjs
+      .send(
+        "service_nei0rs3",
+        "template_8vkxopd",
+        templateParams,
+        "l7jcqENuN423_gLO-"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          setLoading(false);
+          setSuccess(true);
+          setEmail("");
+          setPhone("");
+          setMessage("");
+          setName("");
+        },
+        function (err) {
+          console.log("FAILED...", err);
+        }
+      );
   }
 
   return (

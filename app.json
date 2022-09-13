@@ -28,7 +28,6 @@
       "package": "com.tradingmarkets.app",
       "googleServicesFile": "./google-services.json",
       "useNextNotificationsApi": true
-
     },
     "web": {
       "favicon": "./assets/favicon.png"
