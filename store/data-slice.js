@@ -16,6 +16,18 @@ const initialDataState = {
     youtubelink: "",
     tiktoklink: "",
   },
+  legal: {
+    GDPR: "",
+    CCPA: "",
+    PECR: "",
+    PIPEDA: "",
+    AUSTRALIA: "",
+    tos: "",
+    pp: "",
+    infringement: "",
+    donations: "",
+    cookie: "",
+  },
 };
 
 const dataSlice = createSlice({
@@ -30,6 +42,9 @@ const dataSlice = createSlice({
     },
     setToken(state, action) {
       state.deviceToken = action.payload;
+    },
+    setLegal(state, actions) {
+      state.legal = actions.payload;
     },
     setAllTokens(state, action) {
       state.allTokens = action.payload;

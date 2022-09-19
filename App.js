@@ -6,6 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Contact from "./screens/Contact";
 import Info from "./screens/Info";
+import Legal from "./screens/Legal";
+import LegalInfo from "./screens/LegalInfo";
 import Home from "./screens/Home";
 import NotificationScreen from "./screens/NotificationScreen";
 import SignalsScreen from "./screens/SignalsScreen";
@@ -57,6 +59,13 @@ function App() {
         dispatch(dataActions.setSocial(data["SOCIAL"]));
       }
     });
+    onValue(ref(db, "LEGAL"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setLegal(data["SOCIAL"]));
+        console.log(data["SOCIAL"]);
+      }
+    });
     getToken();
   });
   async function getToken() {
@@ -102,7 +111,23 @@ function App() {
   }, []);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Legal">
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Legal"
+          component={Legal}
+        />
+        <Stack.Screen
+          name="LegalInfo"
+          options={{
+            title: "Legal Information",
+            headerStyle: {
+              backgroundColor: colors.primary,
+            },
+            headerTintColor: colors.white,
+          }}
+          component={LegalInfo}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name="home"
