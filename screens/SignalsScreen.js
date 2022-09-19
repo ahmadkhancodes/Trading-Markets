@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React from "react";
 import colors from "../assets/colors";
-import Constants from "expo-constants";
 import { useSelector } from "react-redux";
 import AppText from "../components/AppText";
 

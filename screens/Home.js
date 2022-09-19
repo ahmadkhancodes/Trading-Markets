@@ -62,7 +62,7 @@ export default function Home({ navigation }) {
         >
           <Image style={styles.image} source={require("../assets/info.png")} />
           <AppText style={{ fontWeight: "bold", fontSize: 17 }}>
-            Information
+            Disclaimer
           </AppText>
         </Pressable>
       </View>
@@ -101,9 +101,12 @@ export default function Home({ navigation }) {
           flexDirection: "row",
         }}
       >
-        <Pressable onPress={onShare} style={styles.iconContainer}>
+        <Pressable
+          onPress={() => navigation.navigate("social")}
+          style={styles.iconContainer}
+        >
           <Image style={styles.image} source={require("../assets/share.png")} />
-          <AppText style={{ fontWeight: "bold", fontSize: 17 }}>Share</AppText>
+          <AppText style={{ fontWeight: "bold", fontSize: 17 }}>Social</AppText>
         </Pressable>
         <Pressable
           onPress={() => Linking.openURL("https://www.google.com")}
@@ -128,6 +131,9 @@ export default function Home({ navigation }) {
           style={styles.lastContainer}
         >
           <AppText style={{ fontWeight: "bold", fontSize: 17 }}>Donate</AppText>
+        </Pressable>
+        <Pressable onPress={onShare} style={styles.lastContainer}>
+          <AppText style={{ fontWeight: "bold", fontSize: 17 }}>Share</AppText>
         </Pressable>
       </View>
     </View>
@@ -165,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryLight,
     width:
       Dimensions.get("screen").width -
-      (Dimensions.get("screen").width * 40) / 100,
+      (Dimensions.get("screen").width * 60) / 100,
     height:
       Dimensions.get("screen").height -
       (Dimensions.get("screen").height * 95) / 100,

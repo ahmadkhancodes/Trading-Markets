@@ -9,6 +9,7 @@ import Info from "./screens/Info";
 import Home from "./screens/Home";
 import NotificationScreen from "./screens/NotificationScreen";
 import SignalsScreen from "./screens/SignalsScreen";
+import Social from "./screens/Social";
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase";
 import { db as db2 } from "./FirebaseForNoti";
@@ -26,7 +27,7 @@ const Stack = createStackNavigator();
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    onValue(ref(db), (snapshot) => {
+    onValue(ref(db, "DATA_FROM_STORE"), (snapshot) => {
       const data = snapshot.val();
       if (data !== null) {
         var arr = [];
@@ -37,6 +38,24 @@ function App() {
         dispatch(dataActions.setAllData(arr));
       }
       console.log("DATA fetched from APP.JS");
+    });
+    onValue(ref(db, "DISCLAIMER"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setDisclaimer(data["DISCLAIMER"]));
+      }
+    });
+    onValue(ref(db, "DONATION"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setDonation(data["DONATION"]));
+      }
+    });
+    onValue(ref(db, "SOCIAL"), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        dispatch(dataActions.setSocial(data["SOCIAL"]));
+      }
     });
     getToken();
   });
@@ -102,7 +121,7 @@ function App() {
         />
         <Stack.Screen
           options={{
-            title: "Information",
+            title: "Disclaimer",
             headerStyle: {
               backgroundColor: colors.primary,
             },
@@ -160,6 +179,17 @@ function App() {
           }}
           name="donate"
           component={Donation}
+        />
+        <Stack.Screen
+          options={{
+            title: "Social Accounts",
+            headerStyle: {
+              backgroundColor: colors.primary,
+            },
+            headerTintColor: colors.white,
+          }}
+          name="social"
+          component={Social}
         />
       </Stack.Navigator>
     </NavigationContainer>

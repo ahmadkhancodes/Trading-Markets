@@ -4,6 +4,18 @@ const initialDataState = {
   allData: [],
   deviceToken: "",
   allTokens: [],
+  disclaimer: "",
+  donation: "",
+  social: {
+    fbpagelink: "",
+    fbgrouplink: "",
+    instgramlink: "",
+    twitterlink: "",
+    websitelink: "",
+    linkedinlink: "",
+    youtubelink: "",
+    tiktoklink: "",
+  },
 };
 
 const dataSlice = createSlice({
@@ -21,6 +33,15 @@ const dataSlice = createSlice({
     },
     setAllTokens(state, action) {
       state.allTokens = action.payload;
+    },
+    setSocial(state, actions) {
+      state.social = actions.payload;
+    },
+    setDonation(state, actions) {
+      state.donation = actions.payload;
+    },
+    setDisclaimer(state, actions) {
+      state.disclaimer = actions.payload;
     },
   },
 });

@@ -3,8 +3,10 @@ import React from "react";
 import colors from "../assets/colors";
 import Constants from "expo-constants";
 import AppText from "../components/AppText";
+import { useSelector } from "react-redux";
 
 export default function Info() {
+  var DISCLAIMER = useSelector((state) => state.data.disclaimer);
   return (
     <View style={styles.container}>
       <AppText
@@ -12,13 +14,7 @@ export default function Info() {
       >
         Disclaimer
       </AppText>
-      <AppText style={{ fontSize: 15 }}>
-        Trading Markets signals are for educational purposes only! We recommend
-        you to use our signals only on a demo account. If you choose to use
-        Trading Markets signals for live trading it is at your own risk. We will
-        bear no responsibility for any losses incurred by your actions. Trading
-        is highly complex and you may lose more than your initial deposit.
-      </AppText>
+      <AppText style={{ fontSize: 15 }}>{DISCLAIMER}</AppText>
     </View>
   );
 }
