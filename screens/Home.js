@@ -11,8 +11,31 @@ import React from "react";
 import AppText from "../components/AppText";
 import colors from "../assets/colors";
 import Constants from "expo-constants";
-
+import { useSelector, useDispatch } from "react-redux";
+import { dataActions } from "../store/data-slice";
+import { useIsFocused } from "@react-navigation/native";
+import { ref, onValue } from "firebase/database";
+import { db } from "../FirebaseForNoti";
 export default function Home({ navigation }) {
+  var dispatch = useDispatch();
+  var TOKEN = useSelector((state) => state.data.deviceToken);
+  React.useEffect(() => {
+    if (TOKEN !== "") {
+      if (useIsFocused) {
+        dispatch(dataActions.saveAppActivityToFirebase());
+      }
+      onValue(
+        ref(db, `/${TOKEN.slice(18, 40)}/obj/receiveNotification`),
+        (snapshot) => {
+          const data = snapshot.val();
+          if (data !== null) {
+            dispatch(dataActions.setReceiveNotification(data));
+          }
+        }
+      );
+    }
+  }, [TOKEN]);
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -35,7 +58,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <AppText style={{ fontSize: 30 }}>Welcome to</AppText>
-        <AppText style={{ fontSize: 40, fontWeight: "bold", marginBottom: 20 }}>
+        <AppText style={{ fontSize: 40, fontWeight: "bold", marginBottom: 10 }}>
           Trading Markets
         </AppText>
       </View>

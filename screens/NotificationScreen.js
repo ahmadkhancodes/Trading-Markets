@@ -5,48 +5,22 @@ import Constants from "expo-constants";
 import AppText from "../components/AppText";
 import { useSelector, useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
-import { set, ref } from "firebase/database";
+import { ref, update } from "firebase/database";
 import { db } from "../FirebaseForNoti";
 
 export default function NotificationScreen() {
   const dispatch = useDispatch();
-  const allTokens = useSelector((state) => state.data.allTokens);
-  const token = useSelector((state) => state.data.deviceToken);
-  const [isEnabled, setIsenabled] = React.useState(
-    allTokens.find((item) => item === token) ? true : false
+  const receiveNotification = useSelector(
+    (state) => state.data.receiveNotification
   );
-
-  // React.useEffect(() => {
-  //   set(ref(db), {
-  //     USER_TOKENS: allTokens,
-  //   });
-  // }, [isEnabled]);
-
-  React.useEffect(() => {
-    console.log("All Tokens now : ", allTokens);
-    set(ref(db), {
-      USER_TOKENS: allTokens,
-    });
-  }, [isEnabled]);
+  const deviceToken = useSelector((state) => state.data.deviceToken);
 
   const checkAndSave = () => {
-    if (!isEnabled) {
-      console.log("Radio : ", isEnabled);
-      var copy_arr = [...allTokens];
-      copy_arr.push(token);
-      dispatch(dataActions.setAllTokens(copy_arr));
-    } else {
-      console.log("Radio : ", isEnabled);
-      var copy_arr = [...allTokens];
-      copy_arr.splice(copy_arr.indexOf(token), 1);
-      dispatch(dataActions.setAllTokens(copy_arr));
-    }
-    setIsenabled(!isEnabled);
+    dispatch(dataActions.setReceiveNotification(!receiveNotification));
+    update(ref(db, `/${deviceToken.slice(18, 40)}/obj`), {
+      receiveNotification: !receiveNotification,
+    });
   };
-
-  React.useEffect(() => {
-    console.log(token);
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -64,9 +38,9 @@ export default function NotificationScreen() {
             left: 100,
           }}
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? colors.primaryLight : "white"}
+          thumbColor={!receiveNotification ? "white" : colors.primaryLight}
           onValueChange={checkAndSave}
-          value={isEnabled}
+          value={receiveNotification}
         />
       </View>
     </View>

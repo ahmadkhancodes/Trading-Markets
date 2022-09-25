@@ -8,8 +8,10 @@ import {
 } from "react-native";
 import React from "react";
 import colors from "../assets/colors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AppText from "../components/AppText";
+import { dataActions } from "../store/data-slice";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function SignalsScreen() {
   var DATA = useSelector((state) => state.data.allData);
@@ -46,6 +48,15 @@ export default function SignalsScreen() {
   React.useEffect(() => {
     count = 1;
   }, [DATA]);
+  var dispatch = useDispatch();
+  var TOKEN = useSelector((state) => state.data.deviceToken);
+  React.useEffect(() => {
+    if (TOKEN !== "") {
+      if (useIsFocused) {
+        dispatch(dataActions.saveSignalActivityToFirebase());
+      }
+    }
+  }, [TOKEN]);
   return (
     <View style={styles.container}>
       {DATA !== [] ? (

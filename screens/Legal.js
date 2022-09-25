@@ -219,7 +219,7 @@ export default function Legal({ navigation }) {
         <TouchableOpacity
           style={{
             paddingHorizontal: 20,
-            backgroundColor: colors.primaryLight,
+            backgroundColor: "green",
             width: "45%",
             alignItems: "center",
             justifyContent: "center",
@@ -227,14 +227,14 @@ export default function Legal({ navigation }) {
             marginHorizontal: 3,
             marginVertical: 10,
           }}
-          onPress={() => navigation.navigate("home")}
+          onPress={() => navigation.navigate("StartupDisclaimer")}
         >
           <AppText style={{ fontWeight: "bold" }}>ACCEPT ALL</AppText>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
             paddingHorizontal: 20,
-            backgroundColor: colors.primaryLight,
+            backgroundColor: "red",
             width: "45%",
             alignItems: "center",
             justifyContent: "center",
